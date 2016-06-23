@@ -3,3 +3,4 @@ ghostdriver.log
 *.json
 *.csv
 *.png
+*.db
