@@ -22,6 +22,8 @@ Each scraped item contains the following fields:
 * `story`: The trending story in which the news article belongs.
 * `link`: The news article's URL.
 
+*Update*: As of last commit, running the spider will store the scraped data in a SQLite database named `scraped_data.db` found in the root directory. Please see the file `gtrends_scraper\pipelines.py` to change the path and filename of the database.
+
 ## Settings
 All settings under `gtrends_scraper\settings.py` are left with their default values, except for the following:
 ```
