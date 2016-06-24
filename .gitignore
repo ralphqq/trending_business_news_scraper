@@ -1,5 +1,5 @@
 *.pyc
-ghostdriver.log
+*.log
 *.json
 *.csv
 *.png

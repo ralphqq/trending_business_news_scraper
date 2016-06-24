@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import logging
 import sqlite3
 
 
@@ -32,18 +33,24 @@ class SQLiteItemPipeline(object):
             pass
         
         else:
-            self.cursor.execute(
-                """
-                INSERT INTO trending_articles(
-                    time_scraped, title, publisher,
-                    story, since_published, link
+            
+            try:
+                self.cursor.execute(
+                    """
+                    INSERT INTO trending_articles(
+                        time_scraped, title, publisher,
+                        story, since_published, link
+                    )
+                    VALUES(?, ?, ?, ?, ?, ?)
+                    """, 
+                    (item['time_scraped'], item['title'],
+                     item['publisher'], item['story'],
+                     item['since_published'], item['link'])
                 )
-                VALUES(?, ?, ?, ?, ?, ?)
-                """, 
-                (item['time_scraped'], item['title'], item['publisher'],
-                 item['story'], item['since_published'], item['link'])
-            )
-            self.db.commit()
+                self.db.commit()
+            
+            except Exception as err:
+                logging.getLogger(__name__).error(err)
         
         return item
     
